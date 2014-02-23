@@ -89,7 +89,7 @@ describe("functional practise", function() {
   it('should return true when all elements match condition', function() {
     // given
     var evenNumbers = [2, 4, 6, 8];
-    var evenNumbers = [1, 2, 3, 4];
+    var mixedNumbers = [1, 2, 3, 4];
     var condition = function(elm) {
       return (elm % 2) === 0;
     };
@@ -101,7 +101,7 @@ describe("functional practise", function() {
 
     // then
     expect(every(evenNumbers, condition)).toBeTruthy();
-    expect(every(mixedNumbers, condition)).toBeFalsey();
+    expect(every(mixedNumbers, condition)).toBeFalsy();
   });
   
   it('should return true when only some elements match condition', function() {
@@ -119,7 +119,7 @@ describe("functional practise", function() {
 
     // then
     expect(some(numbers, condition)).toBeTruthy();
-    expect(some(oddNumbers, condition)).toBeFalsey();
+    expect(some(oddNumbers, condition)).toBeFalsy();
   });
 
   // api
@@ -127,8 +127,6 @@ describe("functional practise", function() {
   // object functionals
 
   // pass by ref
-
-  // namespaces
 
   // privay failures
 
@@ -139,7 +137,5 @@ describe("functional practise", function() {
   // mix-in
 
   // klass
-
-  // design patterns 
 
 });
