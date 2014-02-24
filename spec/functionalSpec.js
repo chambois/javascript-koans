@@ -1,8 +1,10 @@
 describe("functional practise", function() {
 
+  var breaker = {};
+
   var forEach = function(array, action) {
     for (var i = 0, max = array.length; i < max; i++) {
-      action(array[i]);
+      if (action(array[i]) === breaker) return;
     }
   };
 
@@ -14,7 +16,7 @@ describe("functional practise", function() {
     };
 
     // when
-    var reduce = function(/*...*/) {
+    var reduce = function(array, base, combine) {
       //...
     };
 
@@ -30,28 +32,28 @@ describe("functional practise", function() {
     };
 
     // when
-    var map = function(/*...*/) {
+    var map = function(array, action) {
       //...
     };
 
     // then
-    expect(map(numbers, addTwo)).toBe([3, 4, 5]);
+    expect(map(numbers, addTwo)).toEqual([3, 4, 5]);
   });
 
   it('should find a given element in an array', function() {
     // given
-    var people = [1, 2, 3, 4];
+    var numbers = [1, 2, 3, 4];
     var condition = function(elm) {
       return (elm % 2) === 0; 
     };
 
     // when
-    var find = function(/*...*/) {
+    var find = function(array, matcher) {
       //...
     };
 
     // then
-    expect(find(people, condition)).toBe(2);
+    expect(find(numbers, condition)).toBe(2);
   });
 
   it('should select elements from array given a condition', function() {
@@ -62,12 +64,12 @@ describe("functional practise", function() {
     };
 
     // when
-    var select = function(/*...*/) {
+    var select = function(array, matcher) {
       //...
     };
 
     // then
-    expect(select(numbers, condition)).toBe([2, 4]);
+    expect(select(numbers, condition)).toEqual([2, 4]);
   });
 
   it('should reject elements from array given a condition', function() {
@@ -78,12 +80,12 @@ describe("functional practise", function() {
     };
 
     // when
-    var reject = function(/*...*/) {
+    var reject = function(array, matcher) {
       //...
     };
 
     // then
-    expect(reject(numbers, condition)).toBe([1, 3]);
+    expect(reject(numbers, condition)).toEqual([1, 3]);
   });
 
   it('should return true when all elements match condition', function() {
@@ -95,7 +97,7 @@ describe("functional practise", function() {
     };
 
     // when
-    var every = function(/*...*/) {
+    var every = function(array, matcher) {
       //...
     };
 
@@ -113,7 +115,7 @@ describe("functional practise", function() {
     };
 
     // when
-    var some = function(/*...*/) {
+    var some = function(array, matcher) {
       //...
     };
 
@@ -125,10 +127,6 @@ describe("functional practise", function() {
   // api
 
   // object functionals
-
-  // pass by ref
-
-  // privay failures
 
   // inheritance patterns
 
