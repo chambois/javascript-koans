@@ -14,7 +14,7 @@ describe("Access control", function() {
     var name = dog.getName();
 
     expect(dog.name).toBe(undefined);
-    expect(name).toBe(/***/);
+    expect(name).toBe("Fido");
 
     name = "Lassy";
     expect(dog.getName()).toBe(/***/);
@@ -36,10 +36,10 @@ describe("Access control", function() {
     }();
 
     var details = dog.getDetails();
-    expect(details.name).toBe();
+    expect(details.name).toBe("Fido");
 
     details.name = "Lassy";
-    expect(dog.getDetails().name).toBe(/***/);
+    expect(dog.getDetails().name).toBe(/***/)
   });
 
   it("should know if array has the privacy failure", function() {
@@ -54,10 +54,10 @@ describe("Access control", function() {
     }();
 
     var names = dog.getNames();
-    expect(names).toEqual();
+    expect(names).toEqual(["Fido", "Smith"]);
 
     names = ["Another", "Dog"];
-    expect(dog.getNames()).toBe(/***/);
+    expect(dog.getNames()).toEqual(/***/);
   });
 
   it("should know if array has the privacy failure", function() {
@@ -77,9 +77,9 @@ describe("Access control", function() {
     }();
 
     var names = dog.getNames();
-    expect(names).toEqual();
+    expect(names).toEqual([{ name : "Fido" }, { name: "Smith"}]);
 
     names = [{ name : "Another" }, { name : "Dog" }];
-    expect(dog.getNames()).toBe(/***/);
+    expect(dog.getNames()).toEqual(/***/);
   });
 });

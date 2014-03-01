@@ -124,16 +124,4 @@ describe("functional practise", function() {
     expect(some(oddNumbers, condition)).toBeFalsy();
   });
 
-  // api
-
-  // object functionals
-
-  // inheritance patterns
-
-  // currying
-
-  // mix-in
-
-  // klass
-
 });

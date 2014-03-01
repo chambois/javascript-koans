@@ -1,9 +1,9 @@
 
-xdescribe('Prototype chain', function() {
+describe('Prototype chain', function() {
 
   it('should know how to link the prototype to a constructor', function() {
     function Parent(name) {
-      this.name = name;
+      this.name = name || "Default";
     };
 
     Parent.prototype.say = function() {
@@ -21,7 +21,7 @@ xdescribe('Prototype chain', function() {
     var dad = new Parent("Tom");
     var kid = new Child();
 
-    expect(kid.say()).toBe("Tom");
+    expect(kid.say()).toBe("Default");
   });
 
   it('should know how to borrow a constructor', function() {
@@ -35,8 +35,8 @@ xdescribe('Prototype chain', function() {
 
     var kid = new Child("Tim");
 
-    expect(kid.name).toBe(/***/);
-    expect(kid.say()).toBe(/***/);
+    expect(kid.name).toBe("Tim");
+    expect(kid.say).toBe(undefined);
   });
 
   it('should know how to link the prototype and borrow a constructor', function() {
@@ -44,14 +44,24 @@ xdescribe('Prototype chain', function() {
       this.name = name;
     };
 
+    Parent.prototype.say = function() {
+      return this.name;
+    };
+
     function Child(name) {
-      //...
+      Parent.apply(this, arguments);
     }
 
-    //..
+    function inherit(C, P) {
+      //...
+    };
 
-    expect(kid.name).toBe(/***/);
-    expect(kid.say()).toBe(/***/);
+    inherit(Child, Parent);
+
+    var kid = new Child("John");
+
+    expect(kid.name).toBe("John");
+    expect(kid.say()).toBe("John");
   });
 
   it('should know how to share the prototype', function() {
@@ -59,15 +69,25 @@ xdescribe('Prototype chain', function() {
       this.name = name;
     };
 
+    Parent.prototype.say = function() {
+      return this.name;
+    };
+
     function Child(name) {
+      this.name = name; 
     }
 
     function inherit(C, P) {
       //...
     }
 
-    expect(kid.name).toBe(/***/);
-    expect(kid.say()).toBe(/***/);
+    inherit(Child, Parent);
+
+    var kid = new Child("Sam");
+
+    expect(kid.name).toBe("Sam");
+    expect(kid.say()).toBe("Sam");
+    // example to show danger in modifying child prototype
   });
 
   it('should know how to use a temporary constructor', function() {
@@ -75,16 +95,24 @@ xdescribe('Prototype chain', function() {
       this.name = name;
     };
 
-    function Child(name) {
+    Parent.prototype.say = function() {
+      return this.name;
+    }
 
+    function Child(name) {
+      this.name = name;
     }
 
     function inherit(C, P) {
       //...
     }
 
-    expect(kid.name).toBe(/***/);
-    expect(kid.say()).toBe(/***/);
+    inherit(Child, Parent);
+
+    var kid = new Child("Matt");
+
+    expect(kid.name).toBe("Matt");
+    expect(kid.say()).toBe("Matt");
   });
 
   it('should know how to use a temporary constructor and store the superclass', function() {
@@ -92,16 +120,26 @@ xdescribe('Prototype chain', function() {
       this.name = name;
     };
 
-    function Child(name) {
+    Parent.prototype.say = function() { 
+      return this.name;
+    }
 
+    function Child(name) {
+      this.name = name;
     }
 
     function inherit(C, P) {
       //...
     }
 
-    expect(kid.name).toBe(/***/);
-    expect(kid.say()).toBe(/***/);
+    inherit(Child, Parent);
+
+    var kid = new Child("James");
+
+    expect(kid.name).toBe("James");
+    expect(kid.say()).toBe("James");
+
+    // expectation to force use of superclass
   });
 
   it('should know about prototypal inheritance', function() {
@@ -123,7 +161,7 @@ xdescribe('Prototype chain', function() {
       name : "Tom"
     };
 
-    // var child = ...
+    //var child = 
 
     expect(child.name).toBe("Tom");
   });
@@ -156,12 +194,13 @@ xdescribe('Prototype chain', function() {
 
     var tomJr = extendDeep(parent);
 
+    // this shouldn't work
     expect(tomJr.plays.golf).toBe(true);
   });
 
   it('should know how to borrow a method', function() {
     function someFunction() {
-      //var args = ...
+      var args = //...
       return args;
     }
 

@@ -53,7 +53,6 @@ describe("this quirks", function() {
     expect(myObject.value).toBe(/***/);
   });
 
-
   it("should know how to pass object into a method and call directly", function() {
     // given
     var someObject = function() {
